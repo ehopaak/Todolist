@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist</title>
+    <link rel="stylesheet" href="css/todolist.css">
+</head>
+
+<body>
+    <div>
+        <h1>To do List</h1>
+        <p>해야할 list 추가 삭제 하기</p>
+        <p>1번 클릭하면 완료표시(중앙선표시)</p>
+        <p>X표시로 list에서 삭제</p>
+        <form action="">
+            <input type="text" id="subject" autofocus>
+            <button onclick="register(); return false;">추가</button>
+
+        </form>
+        <hr>
+        <ul id="itemList" onclick="lineThrough"></ul>
+    </div>
+
+    <script>
+        function register() {
+            //li에 추가
+            var newItem = document.createElement("li");
+            var subject = document.querySelector("#subject");
+            var newText = document.createTextNode(subject.value);
+            newItem.appendChild(newText);
+
+            //웹 문서에서 부모 노드 가져오기
+            var itemList = document.querySelector("#itemList");
+            itemList.insertBefore(newItem, itemList.childNodes[0]);
+
+            subject.value = "";
+
+            var items = document.querySelectorAll("li");  // 모든 항목 가져오기
+            for (i = 0; i < items.length; i++) {
+                items[i].addEventListener("click", function () {  // 항목 클릭했을 때 실행할 함수
+                    if (this.parentNode)    // 부모 노드가 있다면 
+                        this.parentNode.removeChild(this);  // 부모 노드에서 삭제
+                });
+            }
+        }
+
+
+        function lineThrough() {
+
+        }
+
+    </script>
+</body>
+
+</html>
